@@ -1,0 +1,31 @@
+application: wispapp
+version: 4
+runtime: python
+api_version: 1
+
+handlers:
+- url: /css
+  static_dir: css
+
+- url: /js
+  static_dir: js
+  
+- url: /images
+  static_dir: images
+  
+- url: /flash
+  static_dir: flash
+  
+- url: /favicon\.ico
+  static_files: images/favicon.ico
+  upload: images/favicon\.ico
+  
+- url: /cache.manifest 
+  mime_type: text/cache-manifest 
+  static_files: cache.manifest 
+  upload: cache.manifest 
+  
+- url: /.*
+  script: wisp.py
+  secure: always
+

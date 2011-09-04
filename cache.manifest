@@ -1,0 +1,42 @@
+CACHE MANIFEST
+# 2011-09-04:v
+
+# css
+css/jquery.mobile-1.0b2.min.css
+css/reset.css
+css/fonts.css
+css/theme.css
+css/wisp.css
+
+# js
+js/jquery-1.6.2.min.js
+js/jquery.mobile-1.0b2.min.js
+js/wisp.js
+
+# images
+images/icon16.png
+images/icon32.png
+images/icon64.png
+images/icon96.png
+images/locked.png
+images/unlocked.png
+images/loading.gif
+css/images/ajax-loader.png
+css/images/icons-18-black.png
+css/images/icons-18-white.png
+css/images/icons-36-black.png
+css/images/icons-36-white.png
+css/images/icon-search-black.png
+
+# fonts
+css/fonts/OpenSans-Regular-webfont.eot
+css/fonts/OpenSans-Regular-webfont.woff
+css/fonts/OpenSans-Regular-webfont.ttf
+css/fonts/OpenSans-Regular-webfont.svg
+css/fonts/orbitron-medium-webfont.eot
+css/fonts/orbitron-medium-webfont.woff
+css/fonts/orbitron-medium-webfont.ttf
+css/fonts/orbitron-medium-webfont.svg
+
+NETWORK:
+*

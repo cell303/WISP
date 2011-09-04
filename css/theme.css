@@ -1,0 +1,132 @@
+/* jQuery Mobile Theming */
+
+.ui-bar-f {
+	border: 1px solid 		#B3B3B3;
+	background: 			#e9eaeb;
+	color: 					#3E3E3E;
+	font-weight: bold;
+	text-shadow: 0 1px 1px 	#fff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f0f0f0), to(#e9eaeb)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #f0f0f0, #e9eaeb); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(top, #f0f0f0, #e9eaeb); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, #f0f0f0, #e9eaeb); /* IE10 */
+	background-image:      -o-linear-gradient(top, #f0f0f0, #e9eaeb); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, #f0f0f0, #e9eaeb);
+}
+.ui-bar-f,
+.ui-bar-f input,
+.ui-bar-f select,
+.ui-bar-f textarea,
+.ui-bar-f button {
+	font-family: 'OpenSansRegular', Helvetica, Arial, sans-serif;
+}
+.ui-body-f {
+	text-align:center;
+	border: none;
+	color: 					#fff;
+	text-shadow: 1px 1px 2px #2f6d9f;
+	background: 			#5189a8;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#6497b4), to(#5189a8)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #6497b4, #5189a8); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(top, #6497b4, #5189a8); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, #6497b4, #5189a8); /* IE10 */
+	background-image:      -o-linear-gradient(top, #6497b4, #5189a8); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, #6497b4, #5189a8);
+}
+
+.ui-body-f,
+.ui-body-f input,
+.ui-body-f select,
+.ui-body-f textarea,
+.ui-body-f button {
+	font-family: 'OpenSansRegular', Helvetica, Arial, sans-serif;
+}
+.ui-body-f .ui-link-inherit {
+	color: 					#333333;
+}
+.ui-body-f .ui-link {
+	color: 					#3c677f;
+	font-weight: normal;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.ui-btn-up-f {
+	border: 1px solid 		#ccc;
+	background: 			#eee;
+	font-weight: bold;
+	color: 					#444;
+	text-shadow: 0 1px 1px #f6f6f6;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#fdfdfd), to(#eee)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #fdfdfd, #eee); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(top, #fdfdfd, #eee); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, #fdfdfd, #eee); /* IE10 */
+	background-image:      -o-linear-gradient(top, #fdfdfd, #eee); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, #fdfdfd, #eee);
+}
+.ui-btn-up-f a.ui-link-inherit {
+	color: 					#2F3E46;
+}
+
+.ui-btn-hover-f {
+	border: 1px solid 		#bbb;
+	background: 			#dadada;
+	font-weight: bold;
+	color: 					#101010;
+	text-shadow: 0 1px 1px 	#fff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ededed), to(#dadada)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #ededed, #dadada); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(top, #ededed, #dadada); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, #ededed, #dadada); /* IE10 */
+	background-image:      -o-linear-gradient(top, #ededed, #dadada); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, #ededed, #dadada);
+}
+.ui-btn-hover-f a.ui-link-inherit {
+	color: 					#2F3E46;
+}
+.ui-btn-down-f {
+	border: 1px solid 		#808080;
+	background: 			#fdfdfd;
+	font-weight: bold;
+	color: 					#111111;
+	text-shadow: 0 1px 1px 	#ffffff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#eee), to(#fdfdfd)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #eee, #fdfdfd); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(top, #eee, #fdfdfd); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, #eee, #fdfdfd); /* IE10 */
+	background-image:      -o-linear-gradient(top, #eee, #fdfdfd); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, #eee, #fdfdfd);
+}
+.ui-btn-down-f a.ui-link-inherit {
+	color: 					#2F3E46;
+}
+.ui-btn-up-f,
+.ui-btn-hover-f,
+.ui-btn-down-f {
+	font-family: 'OpenSansRegular', Helvetica, Arial, sans-serif;
+	text-decoration: none;
+}
+
+/* Active class used as the "on" state across all themes
+-----------------------------------------------------------------------------------------------------------*/
+
+.ui-btn-active {
+	border: 1px solid 		#155678;
+	background: 			#3c677f;
+	font-weight: bold;
+	color: 					#fff;
+	cursor: pointer;
+	text-shadow: 0 -1px 1px #145072;
+	text-decoration: none;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#71a0ba), to(#4d83a2)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #71a0ba, #4d83a2); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(top, #71a0ba, #4d83a2); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, #71a0ba, #4d83a2); /* IE10 */
+	background-image:      -o-linear-gradient(top, #71a0ba, #4d83a2); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, #71a0ba, #4d83a2);
+  	outline: none;
+}
+.ui-btn-active a.ui-link-inherit {
+	color: 					#fff;
+}
+
