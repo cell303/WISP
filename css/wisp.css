@@ -357,6 +357,7 @@ footer {
 }
 
 .ui-field-contain { border-width: 0; padding: 0; margin: 1em 0; }
+.app .ui-controlgroup-controls { width: 60%; display: inline-block; } 
 
 @media all and (min-width: 450px){
 	.ui-field-contain { border-width: 0; padding: 0; margin: 1em 0; }
