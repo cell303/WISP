@@ -321,6 +321,7 @@ nav ul li:last-child a{
 	margin-top: 20px;
 	padding-bottom: 5px;
 	border-bottom:1px solid #b6cedc;
+	clear:both;
 }
 
 .info p {
@@ -337,7 +338,8 @@ footer {
 }
 
 .social-wrapper {
-	margin: 10px 0;
+	margin: 10px 10px 10px 0;
+	float:left;
 }
 
 .github {

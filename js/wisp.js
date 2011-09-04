@@ -101,6 +101,9 @@ $('.ui-page').live('pageshow',function() {
 	setTimeout(function() {
 		$weak.focus();
 	},1);
+	
+	//gapi.plusone.go();
+	
 });
 
 // Enables storing data to localStorage

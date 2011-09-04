@@ -18,11 +18,12 @@
         <link rel="icon" href="images/icon96.png" sizes="96x96" type="image/png">
         <link rel="apple-touch-icon" href="images/icon96.png" />
 
-        <link rel="stylesheet" href="css/jquery.mobile-1.0b2.min.css" />
+		<script type="text/javascript" src="https://apis.google.com/js/plusone.js"> {parsetags: 'explicit'} </script>
         <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
         <script type="text/javascript" src="js/wisp.js"></script>
         <script type="text/javascript" src="js/jquery.mobile-1.0b2.min.js"></script>
-        
+		
+		<link rel="stylesheet" href="css/jquery.mobile-1.0b2.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/reset.css" media="all" />
 		<link rel="stylesheet" type="text/css" href="css/fonts.css" media="all" />
 		<link rel="stylesheet" type="text/css" href="css/theme.css" media="all" />
@@ -117,21 +118,13 @@
                         <div class="social">
                             <h4>Like it</h4>
                             <div class="social-wrapper">
-                                <div id="fb-root"></div><script src="https://connect.facebook.net/en_US/all.js#xfbml=1"></script>
-                                <fb:like href="https://wispapp.appspot.com" send="true" width="450" show_faces="true" font=""></fb:like>
+								<div class="g-plusone" data-size="tall" data-href="https://wispapp.appspot.com"></div>
+								<script type="text/javascript">gapi.plusone.go();</script>
                             </div>
-                            <div class="social-wrapper">
-                                <script type="text/javascript">
-                                    (function() {
-                                        var po = document.createElement('script');
-                                        po.type = 'text/javascript';
-                                        po.async = true;
-                                        po.src = 'https://apis.google.com/js/plusone.js';
-                                        var s = document.getElementsByTagName('script')[0];
-                                        s.parentNode.insertBefore(po, s);
-                                    })();
-                                </script>
-                                <g:plusone href="https://wispapp.appspot.com"></g:plusone>
+							<div class="social-wrapper">
+                                <div id="fb-root"></div>
+								<script src="https://connect.facebook.net/en_US/all.js#xfbml=1"></script>
+								<fb:like href="https://wispapp.appspot.com" send="false" layout="box_count" width="50" show_faces="false" font=""></fb:like>
                             </div>
                             <h4>Buy me coffee</h4>
                             <div class="social-wrapper">
