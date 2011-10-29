@@ -5,13 +5,14 @@
 {% endblock %}
 
 {% block content %}
+<div class="info style-box-2 ui-corner-bottom">
 	<div class="hithere">
 		<h3>Settings</h3>
 	</div>
 	<div data-role="fieldcontain">
 		<fieldset data-role="controlgroup">
 			<input type="checkbox" name="enable-settings" id="enable-settings" />
-			<label for="enable-settings">I'm the only one who has access to this device</label>
+			<label for="enable-settings">I'm the only one who has access to this device.</label>
 		</fieldset>
 	</div>
 	
@@ -26,12 +27,26 @@
 				<legend>Default length:</legend>
 				<input type="radio" name="default-length" id="default-length-0" value="7" disabled/>
 				<label for="default-length-0">7</label>
-	
-				<input type="radio" name="default-length" id="default-length-1" value="14" checked="checked" disabled />
+				<input type="radio" name="default-length" id="default-length-1" value="14" disabled />
 				<label for="default-length-1">14</label>
-	
-				<input type="radio" name="default-length" id="default-length-2" value="21" disabled />
+				<input type="radio" name="default-length" id="default-length-2" value="21" checked disabled />
 				<label for="default-length-2">21</label>
+				<input type="radio" name="default-length" id="default-length-3" value="42" disabled />
+				<label for="default-length-3">42</label>
+			</fieldset>
+		</div>
+		
+		<div data-role="fieldcontain">
+		 	<fieldset data-role="controlgroup" id="default-chars">
+		 		<legend>Default charset:</legend>
+				<input type="checkbox" name="chars" id="default-chars-0" checked disabled/>
+				<label for="default-chars-0">abc</label>
+				<input type="checkbox" name="chars" id="default-chars-1" checked disabled />
+				<label for="default-chars-1">ABC</label>
+				<input type="checkbox" name="chars" id="default-chars-2" checked disabled />
+				<label for="default-chars-2">123</label>
+				<input type="checkbox" name="chars" id="default-chars-3" disabled />
+				<label for="default-chars-3">!$%</label>
 			</fieldset>
 		</div>
 		
@@ -45,7 +60,7 @@
 		<div data-role="fieldcontain">
 			<fieldset data-role="controlgroup">
 				<input type="checkbox" name="auto-hide" id="auto-hide" checked disabled />
-				<label for="auto-hide">Hide the passwords after <span class="auto-hide-time">60</span> seconds</label>
+				<label for="auto-hide">Hide the passwords after <span class="auto-hide-time">x</span> seconds</label>
 			</fieldset>
 		</div>
 		
@@ -54,4 +69,5 @@
 			<input type="range" name="auto-hide-time" id="auto-hide-time" value="60" min="10" max="120" data-theme="c" disabled="disabled" />
 		</div>
 	</div>
+</div>	
 {% endblock %}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html manifest="cache.manifest">
-	<head lang="en">     
-		<title>{{ title }}</title>
+    <head lang="en">     
+	<title>{{ title }}</title>
         
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
@@ -18,23 +18,25 @@
         <link rel="icon" href="images/icon96.png" sizes="96x96" type="image/png">
         <link rel="apple-touch-icon" href="images/icon96.png" />
 
-		<script type="text/javascript" src="https://apis.google.com/js/plusone.js"> {parsetags: 'explicit'} </script>
+	<script type="text/javascript" src="https://apis.google.com/js/plusone.js"> {parsetags: 'explicit'} </script>
         <script type="text/javascript" src="js/jquery-1.6.2.min.js"></script>
+	<script type="text/javascript" src="js/json2.js"></script>
         <script type="text/javascript" src="js/wisp.js"></script>
-        <script type="text/javascript" src="js/jquery.mobile-1.0b2.min.js"></script>
+        <script type="text/javascript" src="js/jquery.mobile-1.0rc1.min.js"></script>
 		
-		<link rel="stylesheet" href="css/jquery.mobile-1.0b2.min.css" />
-		<link rel="stylesheet" type="text/css" href="css/reset.css" media="all" />
-		<link rel="stylesheet" type="text/css" href="css/fonts.css" media="all" />
-		<link rel="stylesheet" type="text/css" href="css/theme.css" media="all" />
-		<link rel="stylesheet" type="text/css" href="css/wisp.css" media="all" />
-	</head>
-	<body>    
-        <div data-role="page" data-theme="f" class="{% if is_main %} page-main {% endif  %}">
+	<link rel="stylesheet" href="css/jquery.mobile-1.0rc1.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/reset.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="css/fonts.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="css/theme.css" media="all" />
+	<link rel="stylesheet" type="text/css" href="css/wisp.css" media="all" />
+    
+    </head>
+    <body>    
+        <div data-role="page" data-theme="f" class="{% if is_main %}page-main{% endif  %} {% block page-class %}{% endblock %}">
             <header data-role="header" data-theme="a">
-                <h1><a href="/" data-direction="reverse">{{ title }}</a></h1>
-                <a href="/settings" data-icon="gear" class="ui-btn-right">Settings</a>
-                {% block back %}{% endblock %}
+		<h1><a href="/index" data-direction="reverse">{{ title }}</a></h1>
+		<a href="/settings" data-icon="gear" class="ui-btn-right">Settings</a>
+		{% block back %}{% endblock %}
             </header>
             <nav class="mobile-visible style-box-1" data-role="navbar">
                 <ul>
@@ -45,38 +47,49 @@
             </nav>
         
             <section data-role="content">
+		{% block left %}
                 <div class="left">
                     <div class="logo mobile-hidden">
-                        <h1><a href="/" data-direction="reverse">{{title}}</a></h1>
+                        <h1><a href="/index" data-direction="reverse">{{title}}</a></h1>
                         <h2>{{ subtitle }}</h2>
                     </div>
-                    <div class="app">
+                    <div class="app">                    
                         <div data-role="fieldcontain">
                             <label for="weak" class="weak-label">Insert weak password: </label>
                             <input type="password" name="weak" class="weak" value="" placeholder="Weak password" data-theme="c" />
                         </div>
-                        
-                        <div class="icon">
-                            <img class="locked" src="images/locked.png" alt="Locked" title="Go!"/>
-                            <img class="loading" src="images/loading.gif" alt="Loading" title="In progress"/>
-                            <img class="unlocked" src="images/unlocked.png" alt="Click to clear content" title="Click to clear content"/>
-                            <div class="clock" title="Click to clear content">60</div>
+			<div class="icon">
+			    <img class="locked" src="images/locked.png" alt="Locked" title="Go!"/>
+			    <img class="loading" src="images/loading.gif" alt="Loading" title="In progress"/>
+			    <img class="unlocked" src="images/unlocked.png" alt="Click to clear content" title="Click to clear content"/>
+			<div class="clock" title="Click to clear content">60</div>
                         </div>
-                        
                         <div data-role="fieldcontain">
-                            <fieldset data-role="controlgroup" data-type="horizontal">
+                            <fieldset data-role="controlgroup" data-type="horizontal" data-theme="f">
                                 <input type="radio" name="length" id="{{ file }}-length-0" class="length-0 length" value="7" />
                                 <label for="{{ file }}-length-0">7</label>
-                    
-                                <input type="radio" name="length" id="{{ file }}-length-1" class="length-1 length" value="14" checked="checked" />
+                                <input type="radio" name="length" id="{{ file }}-length-1" class="length-1 length" value="14" />
                                 <label for="{{ file }}-length-1">14</label>
-                    
-                                <input type="radio" name="length" id="{{ file }}-length-2" class="length-2 length" value="21" />
+                                <input type="radio" name="length" id="{{ file }}-length-2" class="length-2 length" value="21" checked />
                                 <label for="{{ file }}-length-2">21</label>
+				<input type="radio" name="length" id="{{ file }}-length-3" class="length-3 length" value="42" />
+                                <label for="{{ file }}-length-3">42</label>
                             </fieldset>
                         </div>
-                                                 
-                        <div>
+			<div class="chars" data-role="fieldcontain">
+			    <fieldset data-role="controlgroup" data-type="horizontal" data-theme="f"> 
+				<input type="checkbox" name="chars" id="{{ file }}-chars-0" class="chars-0 chars" checked />
+				<label for="{{ file }}-chars-0">abc</label>
+				<input type="checkbox" name="chars" id="{{ file }}-chars-1" class="chars-1 chars" checked />
+				<label for="{{ file }}-chars-1">ABC</label>
+				<input type="checkbox" name="chars" id="{{ file }}-chars-2" class="chars-2 chars" checked />
+				<label for="{{ file }}-chars-2">123</label>
+				<input type="checkbox" name="chars" id="{{ file }}-chars-3" class="chars-3 chars" />
+				<label for="{{ file }}-chars-3">!$%</label>
+			    </fieldset>
+			</div>   
+                        <div class="less">
+                            <p class="weak-label">Copy strong passwords:</p>
                             <div class="strong-0 strong strong-placeholder ui-input-text ui-corner-all ui-body-c ui-shadow-inset" data-placeholder="Primary strong password"></div>&nbsp;
                             <div class="strong-1 strong strong-placeholder ui-input-text ui-corner-all ui-body-c ui-shadow-inset" data-placeholder="Secondary strong password"></div>&nbsp;
                         </div>
@@ -89,19 +102,16 @@
                             <div class="strong-6 strong strong-placeholder ui-corner-all ui-body-c ui-shadow-inset" data-placeholder="7th strong password"></div>&nbsp;
                             <div class="strong-7 strong strong-placeholder ui-corner-all ui-body-c ui-shadow-inset" data-placeholder="8th strong password"></div>&nbsp;
                         </div>
-                        
-                        <div data-role="fieldcontain">
-                            <fieldset data-role="controlgroup">
-                                <legend class="tos-legend">I agree with the <a href="/tos" style="color:#fff">Terms of Service</a>.</legend>
-                                <input type="checkbox" name="i-agree" id="{{ file }}-i-agree" class="i-agree" checked />
-                                <label for="{{ file }}-i-agree">I agree</label>
-                            </fieldset>
-                        </div>
-                        
+                                                
                     </div>                    
                 </div>
-                
+		{% endblock %}
+		{% block right %}
                 <div class="right">
+		    <div class="info simple-box style-box-2 ui-corner-all mobile-hidden">
+			<h4>WISP is currently in Beta</h4>
+			<p>Please keep in mind that this is a preview. The service is not working correctly and will probably change in the future.</p>
+		    </div>
                     <nav class="mobile-hidden style-box-1 ui-corner-top">
                         <ul>
                             {% for n in nav %}
@@ -109,60 +119,50 @@
                             {% endfor %}
                         </ul>
                     </nav>
-                    <div class="info style-box-2">
                     {% block content %}
-                        <div class="hithere">
-                            <h3>Hi there!</h3>
-                            <p>WISP is an easy way to turn your weak passwords into strong ones. Find out <a href="/faq">more</a>.</p>
-                        </div>   
-                        <div class="social">
-                            <h4>Like it</h4>
-                            <div class="social-wrapper">
-								<div class="g-plusone" data-size="tall" data-href="https://wispapp.appspot.com"></div>
-								<script type="text/javascript">gapi.plusone.go();</script>
-                            </div>
-							<div class="social-wrapper">
-                                <div id="fb-root"></div>
-								<script src="https://connect.facebook.net/en_US/all.js#xfbml=1"></script>
-								<fb:like href="https://wispapp.appspot.com" send="false" layout="box_count" width="50" show_faces="false" font=""></fb:like>
-                            </div>
-                            <h4>Buy me coffee</h4>
-                            <div class="social-wrapper">
-                                <script type="text/javascript">
-                                    (function() {
-                                        var s = document.createElement('script'), t = document.getElementsByTagName('script')[0];
-                                        s.type = 'text/javascript';
-                                        s.async = true;
-                                        s.src = 'https://api.flattr.com/js/0.6/load.js?mode=auto';
-                                        t.parentNode.insertBefore(s, t);
-                                    })();
-                                </script>
-                                <a class="FlattrButton" style="display:none;" href="https://wispapp.appspot.com/#more"></a>
-                                <noscript><a href="https://flattr.com/thing/275906/WISP-Password-Prompter" target="_blank">
-                                <img src="https://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></noscript>
-                            </div>
-                            <div class="social-wrapper">
-                                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" data-role="none">
-                                    <input type="hidden" name="cmd" value="_s-xclick">
-                                    <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----
-                                    ">
-                                    <input type="image" data-role="none" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
-                                    <img alt="" border="0" src="https://www.paypalobjects.com/de_DE/i/scr/pixel.gif" width="1" height="1">
-                                </form>
-                            </div>
-                            <h4>Get the source</h4>
-                            <p><a href="https://github.com/cell303/WISP"><img src="https://a248.e.akamai.net/assets.github.com/images/modules/header/logov6.png" class="github" /></a></p>
-                            <div class="mobile-hidden">
-                                <a href="https://github.com/cell303/WISP"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
-                            </div>
-                        </div>  
+		    <div class="info style-box-2 ui-corner-bottom">
+                    	<div class="tag-line">
+                    	    <p>&raquo;WISP is an easy way to turn your weak passwords into strong ones&laquo;</p>
+                    	</div>   
+                        <div class="mobile-hidden">
+			    <a href="https://github.com/cell303/WISP"><img style="position: absolute; top: 0; left: 0; border: 0;" src="https://a248.e.akamai.net/assets.github.com/img/bec6c51521dcc8148146135149fe06a9cc737577/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f6c6566745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
+			</div>
+		    </div>
+		    <div class="info simple-box style-box-2 ui-corner-all mobile-hidden" style="min-height:450px">
+			<h4>Receive your passwords on the go</h4>
+			<img src="/images/mobile.png" style="width:200px; float:left"/>
+			<p style="padding-top:25px">WISP is optimized for all kinds of mobile devices. The mobile version of WISP is displayed when you open this page with your phone's browser. </p>
+			<p>WISP will also be available as mobile app for all major devices soon.</p>
+		    </div>
+		    <!--<div class="info simple-box style-box-2 ui-corner-all mobile-hidden">
+			<h4>Get the Chrome browser extension</h4>
+			<p>Easy one-click access to your passwords with the Chrome browser extension. Get it at the Chrome Web Store</p>
+		    </div>-->
                     {% endblock %}
-                    </div>
-                    <footer class="style-box-1 ui-corner-bottom">
-                        <p>by <a href="https://twitter.com/#!/cell303" rel="external">@cell303</a></p>
-                    </footer>
                 </div>
+		{% endblock %}
             </section>
+            <footer data-role="footer" data-theme="f">
+            	<div class="ui-content">
+		    <div class="left">
+			<p>I understand that the usage of this service is at my sole risk.</p>
+			<div data-role="fieldcontain">
+			       <fieldset data-role="controlgroup">
+				   <legend class="tos-legend">I agree with the <a href="/terms">Terms of Service</a>.</legend>
+				   <input type="checkbox" name="i-agree" id="{{ file }}-i-agree" class="i-agree" checked />
+				   <label for="{{ file }}-i-agree">I agree</label>
+			       </fieldset>
+			   </div>
+			</div>
+			<div class="right">
+			    <div class="icon-small">
+				 <a href="/index"><img class="locked" src="images/locked.png" /></a>
+			    </div>
+			    <h1><a href="/index">WISP</a></h1>
+			    <p>by <a href="https://twitter.com/#!/cell303" rel="external">@cell303</a></p>
+			</div>			
+		    </div>
+        	</footer>
         </div>
 	</body>
 </html>

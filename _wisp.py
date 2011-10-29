@@ -5,8 +5,7 @@ import wsgiref.handlers
 import simplejson
 import string
 import random
-import rc4
-import base64
+
 # GQL Encoder
 import json
 
@@ -67,8 +66,6 @@ class Whisper(webapp.RequestHandler):
 	"""Retrives the strong passwords for a given weak password"""
 	def post(self):
 		weak = self.request.get('weak').encode('utf-8')
-#		self.response.out.write(weak)
-		dbpw = base64.standard_b64encode(str(weak + weak))# double + base64
 		weak_hash = hashlib.sha224(weak).hexdigest()
 		
 		charset = PASSWORD_SET
@@ -92,8 +89,14 @@ class Whisper(webapp.RequestHandler):
 				options['uppercase'] = options['lowercase'] = options['digits'] = True
 				options['special'] = False
 			
-		password = Password.all().filter('weak =', weak_hash).filter('lowercase =',options['lowercase']).filter('uppercase =',options['uppercase']).filter('digits =',options['digits']).filter('special =',options['special']).get()
-		
+		password = Password.all()
+		.filter('weak =', weak_hash)
+		.filter('lowercase =',options['lowercase'])
+		.filter('uppercase =',options['uppercase'])
+		.filter('digits =',options['digits'])
+		.filter('special =',options['special'])
+		.get()
+
 		if not password:
 			randoms = get_random_passwords(n=PASSWORD_NUMBER, len=PASSWORD_LENGTH, set=charset)
 			
@@ -105,9 +108,9 @@ class Whisper(webapp.RequestHandler):
 			password.special = options['special'] 
 			
 			for r in randoms:
-				password.strong.append(rc4.encrypt(r,dbpw)) # encrypte random pws
+				password.strong.append(r)
 				
-			password.put() #in db
+			password.put()
 		
 		# Integrate old passwords	
 		if len(password.strong) is 0:
@@ -127,11 +130,7 @@ class Whisper(webapp.RequestHandler):
 		if len(password.strong[0]) > PASSWORD_LENGTH:
 			for i in range(len(password.strong)):
 				password.strong[i] = password.strong[i][:PASSWORD_LENGTH] 	
-			
-
-		#for enpw in password.strong:
-		#	enpw=rc4.decrypt(enpw,dbpw) # decrypt
-			
+					
 		# Encode using the GQL Encoder
 		data = json.encode(password.strong)
 		

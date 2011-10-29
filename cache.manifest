@@ -1,8 +1,8 @@
 CACHE MANIFEST
-# 2011-09-04:v9
+# 2011-10-13:2
 
 # css
-css/jquery.mobile-1.0b2.min.css
+css/jquery.mobile-1.0rc1.min.css
 css/reset.css
 css/fonts.css
 css/theme.css
@@ -10,7 +10,8 @@ css/wisp.css
 
 # js
 js/jquery-1.6.2.min.js
-js/jquery.mobile-1.0b2.min.js
+js/jquery.mobile-1.0rc1.min.js
+js/json2.js
 js/wisp.js
 
 # images
@@ -21,6 +22,7 @@ images/icon96.png
 images/locked.png
 images/unlocked.png
 images/loading.gif
+images/mobile.png
 css/images/ajax-loader.png
 css/images/icons-18-black.png
 css/images/icons-18-white.png
@@ -33,6 +35,10 @@ css/fonts/OpenSans-Regular-webfont.eot
 css/fonts/OpenSans-Regular-webfont.woff
 css/fonts/OpenSans-Regular-webfont.ttf
 css/fonts/OpenSans-Regular-webfont.svg
+css/fonts/OpenSans-Bold-webfont.eot
+css/fonts/OpenSans-Bold-webfont.woff
+css/fonts/OpenSans-Bold-webfont.ttf
+css/fonts/OpenSans-Bold-webfont.svg
 css/fonts/orbitron-medium-webfont.eot
 css/fonts/orbitron-medium-webfont.woff
 css/fonts/orbitron-medium-webfont.ttf

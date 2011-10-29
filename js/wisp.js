@@ -1,5 +1,14 @@
-var $page, $weak, $icon, clockIntervals = [];
-	
+var $page, $weak, $icon, supports_local_storage, clockIntervals = [];
+
+$(document).ready(function() {
+	// check for localStorage support
+	try {
+		supports_local_storage = 'localStorage' in window && window['localStorage'] !== null;
+	} catch(e) {
+		supports_local_storage = false;
+	}
+});
+
 $('.ui-page').live('pagecreate',function(event) {
 	
 	$weak = $('.weak');
@@ -10,9 +19,9 @@ $('.ui-page').live('pagecreate',function(event) {
 	reset();
 		
 	// Hide the "More..."-Button after it has been clicked
-	$('.more').bind('vclick', function() {
-		$(this).find('h3').hide();
-	});
+	/*$('.more .ui-collapsible-heading').bind('vclick', function() {
+		$(this).hide();
+	});*/
 	
 	// AJAX request by clicking on the lock
 	$icon.bind('vclick', function() {
@@ -33,7 +42,7 @@ $('.ui-page').live('pagecreate',function(event) {
 		var status = $icon.data('status'),
 			weak = $weak.val();
 			
-		if( e.keyCode == '13' && status != 'loading') {
+		if( e.keyCode == '13' && status != 'loading' && weak != '') {
 			clearIntervals();
 			whisper(weak);
 		}
@@ -41,7 +50,7 @@ $('.ui-page').live('pagecreate',function(event) {
 		
 	// Change PW-length after loading
 	$page.find('.length').bind('change', function() {
-		if( !$page.find('.strong-1').data('v') )
+		if( !$page.find('.strong-0').data('v') )
 			return
 		var to, v;
 		to = $page.find('.length:checked').val();
@@ -51,11 +60,14 @@ $('.ui-page').live('pagecreate',function(event) {
 		});
 	});
 	
-	// Asks the user if this is his device before enabeling the settings
-	$('#enable-settings').bind('change', function() {
-		enableSettings($(this).is(':checked'));
-		localStorage[$(this).attr('id')] = $(this).is(':checked');
-	});
+	$page.find('.chars').bind('change', function() {
+		weak = $weak.val();	
+		if(weak != '') {
+			clearIntervals();
+			whisper(weak);
+		}	
+	});	
+	
 });
 
 $('.ui-page').live('pagebeforeshow',function() {
@@ -68,31 +80,54 @@ $('.ui-page').live('pagebeforeshow',function() {
 	// Set default icon
 	setStatus('locked');
 	
-	// Set default values based on the settings
-	if(localStorage['default-password'] != '') {
-		$weak.val(localStorage['default-password']);
-	}
-	
-	if(localStorage['default-length'] == 'true') {
-		$page.find('.length-0').attr('checked',localStorage['default-length-0'] == 'true').checkboxradio('refresh'); 
-		$page.find('.length-1').attr('checked',localStorage['default-length-1'] == 'true').checkboxradio('refresh'); 
-		$page.find('.length-2').attr('checked',localStorage['default-length-2'] == 'true').checkboxradio('refresh');
-	}
-	
-	// Auto retrieve password when enabled
-	if(localStorage['auto-retrieve'] == 'true') {
-		whisper($weak.val());	
+	if(supports_local_storage) {
+		
+		// Set default values based on the settings
+		if(localStorage['default-password'] != '') {
+			$weak.val(localStorage['default-password']);
+		}
+		
+		if(typeof localStorage['default-chars-0'] != 'undefined') {
+			$page.find('.chars-0').attr('checked',localStorage['default-chars-0'] == 'true').checkboxradio('refresh');
+			$page.find('.chars-1').attr('checked',localStorage['default-chars-1'] == 'true').checkboxradio('refresh');
+			$page.find('.chars-2').attr('checked',localStorage['default-chars-2'] == 'true').checkboxradio('refresh');
+			$page.find('.chars-3').attr('checked',localStorage['default-chars-3'] == 'true').checkboxradio('refresh'); 
+		}	
+		
+		if(localStorage['default-length'] == 'true') {
+			$page.find('.length-0').attr('checked',localStorage['default-length-0'] == 'true').checkboxradio('refresh'); 
+			$page.find('.length-1').attr('checked',localStorage['default-length-1'] == 'true').checkboxradio('refresh'); 
+			$page.find('.length-2').attr('checked',localStorage['default-length-2'] == 'true').checkboxradio('refresh');
+		}
+		
+		// Auto retrieve password when enabled
+		if(localStorage['auto-retrieve'] == 'true') {
+			whisper($weak.val());	
+		}
 	}
 	
 	// Settings.html
-	// Fix to show the slider disabled initially
+	// Fix to show the slider disabled initially	
 	$("#settings input[type='number']").css({opacity: 0.3}).slider('disable');
 	
-	// Display data if there is any stored in the localstorage
-	if(localStorage['enable-settings'] == 'true') {
-		$('#enable-settings').attr('checked',true).checkboxradio('refresh');
-		enableSettings(true);
-	}	
+	if(supports_local_storage) {
+		
+		// Asks the user if this is his device before enabeling the settings
+		$('#enable-settings').bind('change', function() {
+			enableSettings($(this).is(':checked'));
+			localStorage[$(this).attr('id')] = $(this).is(':checked');
+		});
+		
+		// Display data if there is any stored in the localstorage
+		if(localStorage['enable-settings'] == 'true') {
+			$('#enable-settings').attr('checked',true).checkboxradio('refresh');
+			enableSettings(true);
+		}
+	}
+	else {
+		// No Cookie support so far
+		$('#enable-settings').attr('checked',false).checkboxradio('refresh');
+	}
 	
 });
 
@@ -101,9 +136,6 @@ $('.ui-page').live('pageshow',function() {
 	setTimeout(function() {
 		$weak.focus();
 	},1);
-	
-	//gapi.plusone.go();
-	
 });
 
 // Enables storing data to localStorage
@@ -146,9 +178,9 @@ enableSettings = function(enable) {
 		});
 		
 		// Extra - Update checkbox text when slider moves
-		$settings.find('#auto-hide-time').bind('change', function() {
+		/*$settings.find('#auto-hide-time').bind('change', function() {
 			$settings.find('.auto-hide-time').html($(this).val());
-		});
+		});*/
 		
 		// Save all default values to the localStorage
 		$settings.find('input').trigger('change');
@@ -167,13 +199,22 @@ enableSettings = function(enable) {
 
 // requests the strong passwords
 whisper = function(weak) {
-	if( $page.find('.i-agree').is(':checked') ) {	
+	if( $page.find('.i-agree').is(':checked') ) {
+		
 		setStatus('loading');
+		
+		options = JSON.stringify({
+			'lowercase': $page.find('.chars-0').is(':checked'),
+			'uppercase': $page.find('.chars-1').is(':checked'),
+			'digits': $page.find('.chars-2').is(':checked'),
+			'special': $page.find('.chars-3').is(':checked')
+		});
+		
 		// Request the passwords from the server
 		$.ajax({
 			type: "POST",
 			url: "/whisper",
-			data: "weak="+weak,
+			data: "weak="+weak+'&options='+options,
 			success: function(data) {
 				showPasswords(data);
 			}
@@ -197,7 +238,7 @@ showPasswords = function(data) {
 	$clock = $page.find('.clock');
 	
 	// Use settings or default values
-	if( typeof localStorage['auto-hide'] != 'undefined' ) {
+	if(supports_local_storage && typeof localStorage['auto-hide'] != 'undefined') {
 		if( localStorage['auto-hide'] == 'true' ) {
 			if( typeof localStorage['auto-hide-time'] != 'undefined' ) {
 				_len = localStorage['auto-hide-time'];
@@ -243,10 +284,12 @@ reset = function() {
 	// Stop counting down
 	clearIntervals();
 	
-	$('.weak').val('');
+	$weak.val('');
 	$('.strong').each(function() {
 		$(this).addClass('strong-placeholder').data('v','').html($(this).data('placeholder'));
 	});
+	
+	$weak.focus();
 };
 
 // Clear all intervals in the array (should be just one)
