@@ -89,13 +89,7 @@ class Whisper(webapp.RequestHandler):
 				options['uppercase'] = options['lowercase'] = options['digits'] = True
 				options['special'] = False
 			
-		password = Password.all()
-		.filter('weak =', weak_hash)
-		.filter('lowercase =',options['lowercase'])
-		.filter('uppercase =',options['uppercase'])
-		.filter('digits =',options['digits'])
-		.filter('special =',options['special'])
-		.get()
+		password = Password.all().filter('weak =', weak_hash).filter('lowercase =',options['lowercase']).filter('uppercase =',options['uppercase']).filter('digits =',options['digits']).filter('special =',options['special']).get()
 
 		if not password:
 			randoms = get_random_passwords(n=PASSWORD_NUMBER, len=PASSWORD_LENGTH, set=charset)

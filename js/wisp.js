@@ -216,7 +216,11 @@ whisper = function(weak) {
 			url: "/whisper",
 			data: "weak="+weak+'&options='+options,
 			success: function(data) {
+				setStatus('unlocked');
 				showPasswords(data);
+			},
+			error: function() {
+				reset();
 			}
 		});
 	}
@@ -232,7 +236,6 @@ showPasswords = function(data) {
 		s = data[_i];
 		$page.find('.strong-'+_i).removeClass('strong-placeholder').data('v',s).html(s.substring(0,to));
 	}
-	setStatus('unlocked');
 	
 	// Automatically remove password after 60 sec to prevent abuse
 	$clock = $page.find('.clock');

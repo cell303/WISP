@@ -57,6 +57,3 @@ def decrypt(data, key, decode=base64.standard_b64decode):
     pos = ord(data[0]) + 1
     salt = data[1:pos]
     return crypt(data[pos:], key + salt)
-
-
-

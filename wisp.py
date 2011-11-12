@@ -5,8 +5,10 @@ import wsgiref.handlers
 import simplejson
 import string
 import random
+import copy			
 import rc4
 import base64
+
 # GQL Encoder
 import json
 
@@ -32,15 +34,15 @@ class Password(db.Model):
 	
 	strong1 = db.StringProperty()
 	strong2 = db.StringProperty()
+
+	encrypted = db.BooleanProperty()
 		
 class MainPage(webapp.RequestHandler):
-	"""Mainpage"""
 	def get(self, file):
-		#query = Password.all()
-		#entries =query.fetch(9999)
-		#db.delete(entries)
+		"""query = Password.all()
+		entries =query.fetch(9999)
+		db.delete(entries)"""
 		
-		#update()
 		is_main = False
 		
 		if not file:
@@ -67,10 +69,10 @@ class Whisper(webapp.RequestHandler):
 	"""Retrives the strong passwords for a given weak password"""
 	def post(self):
 		weak = self.request.get('weak').encode('utf-8')
-#		self.response.out.write(weak)
-		dbpw = base64.standard_b64encode(str(weak + weak))# double + base64
 		weak_hash = hashlib.sha224(weak).hexdigest()
 		
+		key = weak
+
 		charset = PASSWORD_SET
 		options = dict()
 		options['uppercase'] = options['lowercase'] = options['digits'] = True
@@ -93,7 +95,7 @@ class Whisper(webapp.RequestHandler):
 				options['special'] = False
 			
 		password = Password.all().filter('weak =', weak_hash).filter('lowercase =',options['lowercase']).filter('uppercase =',options['uppercase']).filter('digits =',options['digits']).filter('special =',options['special']).get()
-		
+
 		if not password:
 			randoms = get_random_passwords(n=PASSWORD_NUMBER, len=PASSWORD_LENGTH, set=charset)
 			
@@ -103,46 +105,63 @@ class Whisper(webapp.RequestHandler):
 			password.lowercase = options['lowercase']
 			password.digits = options['digits']
 			password.special = options['special'] 
-			
+
 			for r in randoms:
-				password.strong.append(rc4.encrypt(r,dbpw)) # encrypte random pws
-				
-			password.put() #in db
+				r = rc4.encrypt(r,key)
+				password.strong.append(r)
+
+			password.encrypted = True
+			password.put()
 		
+		if password.encrypted == True:
+			for i in range(len(password.strong)):
+				password.strong[i] = rc4.decrypt(password.strong[i], key)
+		else:
+			encrypt_and_put(password, key)
+
 		# Integrate old passwords	
 		if len(password.strong) is 0:
 			merge_old_passwords(password, charset)
+			encrypt_and_put(password, key)
 		
 		# if the PASSWORD_NUMBER has been altered
 		if len(password.strong) < PASSWORD_NUMBER:
 			fill_up_password_number(password, charset)
+			encrypt_and_put(password, key)
+
+		if len(password.strong) > PASSWORD_NUMBER:
+			password.strong = password.strong[:PASSWORD_NUMBER]   
 			
 		# if the PASSWORD_LENGTH has been altered
 		if len(password.strong[0]) < PASSWORD_LENGTH:
 			fill_up_password_length(password, charset)
-		
-		if len(password.strong) > PASSWORD_NUMBER:
-			password.strong = password.strong[:PASSWORD_NUMBER]   
+			encrypt_and_put(password, key)
 		
 		if len(password.strong[0]) > PASSWORD_LENGTH:
 			for i in range(len(password.strong)):
-				password.strong[i] = password.strong[i][:PASSWORD_LENGTH] 	
-			
+				password.strong[i] = password.strong[i][:PASSWORD_LENGTH]
 
-		#for enpw in password.strong:
-		#	enpw=rc4.decrypt(enpw,dbpw) # decrypt
-			
 		# Encode using the GQL Encoder
 		data = json.encode(password.strong)
 		
 		self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
 		self.response.out.write(data)
-			
+
+def encrypt_and_put(password, key):
+	backup = copy.copy(password.strong)
+
+	for i in range(len(password.strong)):
+		password.strong[i] = rc4.encrypt(password.strong[i], key)
+	password.encrypted = True
+	password.put() 
+
+	password.strong = backup
+
 def get_random_passwords(n, len, set):
 	"""Generates n random passwords out of a given set of chars with a length of len"""
 	rnd = []
 	for i in range(n):
-		rnd.append(''.join(random.choice(set) for x in range(len)))
+		rnd.append("".join(random.choice(set) for x in range(len)))
 	return rnd		
 
 def merge_old_passwords(password, set):
@@ -151,11 +170,11 @@ def merge_old_passwords(password, set):
 	
 	randoms[0] = password.strong1
 	randoms[1] = password.strong2
-			
+
 	for r in randoms:
 		password.strong.append(r)
 				
-	password.put()	
+	return password
 
 
 def fill_up_password_number(password, set):
@@ -166,7 +185,7 @@ def fill_up_password_number(password, set):
 			password.strong.append(r)
 		else:
 			break
-	password.put()
+	return password
 
 def fill_up_password_length(password, set):
 	"""Fills up a given password with randoms chars to the global maximum"""
@@ -174,19 +193,8 @@ def fill_up_password_length(password, set):
 	for i in range(PASSWORD_NUMBER):
 		length = len(password.strong[i])
 		password.strong[i] += randoms[i][length:]
-	password.put()
+	return password
 
-def update():
-	passwords = Password.all()
-	for password in passwords:
-		if not password.uppercase:
-			password.uppercase = True
-			password.lowercase = True
-			password.digits = True
-			password.special = False
-			password.put()
-
-		
 application = webapp.WSGIApplication(
 	[('/whisper', Whisper),
 	 (r'/(.*)', MainPage),

@@ -1,6 +1,6 @@
 *:focus
 {
-    outline: none;
+	outline: none;
 }
 
 ::-webkit-selection,
@@ -113,14 +113,14 @@ h1 a {
 }
 
 .icon-small {
-    width:64px;
-    height:64px;
-    margin-bottom: 10px;
+	width:64px;
+	height:64px;
+	margin-bottom: 10px;
 }
 
 .icon-small img {
-    width:100%;
-    opacity: 0.5;
+	width:100%;
+	opacity: 0.5;
 }
 
 .icon * {
@@ -166,7 +166,7 @@ h1 a {
 .strong-0::-o-selection,
 .strong-0::selection
 {
-    background:#a3ffa3;
+	background:#a3ffa3;
 }
 .strong-1 {
 	background:#ffd6d6;
@@ -175,7 +175,7 @@ h1 a {
 .strong-1::-moz-selection,
 .strong-1::selection
 {
-    background:#ffa3a3;
+	background:#ffa3a3;
 }
 .strong-2 {
 	background:#ffffd6;
@@ -184,7 +184,7 @@ h1 a {
 .strong-2::-moz-selection,
 .strong-2::selection
 {
-    background:#ffffa3;
+	background:#ffffa3;
 }
 .strong-3 {
 	background:#d6d6ff;
@@ -193,7 +193,7 @@ h1 a {
 .strong-3::-moz-selection,
 .strong-3::selection
 {
-    background:#a3a3ff;
+	background:#a3a3ff;
 }
 .strong-4 {
 	background:#d6ffff;
@@ -202,7 +202,7 @@ h1 a {
 .strong-4::-moz-selection,
 .strong-4::selection
 {
-    background:#a3ffff;
+	background:#a3ffff;
 }
 .strong-5 {
 	background:#ffd6f5;
@@ -211,7 +211,7 @@ h1 a {
 .strong-5::-moz-selection,
 .strong-5::selection
 {
-    background:#ffa3ff;
+	background:#ffa3ff;
 }
 .strong-6 {
 	background:#f0f0f0;
@@ -382,25 +382,25 @@ footer p {
 }
 
 footer .left {
-    padding-top:20px;
-    margin-bottom: 30px;
+	padding-top:20px;
+	margin-bottom: 30px;
 }
 
 footer .left .ui-icon {
-    top: 1em;
+	top: 1em;
 }
 
 footer .right {
-    margin-top:-10px;
+	margin-top:-10px;
 }
 
 footer h1 {
-    font-size: 2.8em;
-    margin-left:5px;
+	font-size: 2.8em;
+	margin-left:5px;
 }
 
 footer h1:hover {
-    text-shadow: 1px 1px 2px #2f6d9f!important;
+	text-shadow: 1px 1px 2px #2f6d9f!important;
 }
 
 
@@ -493,27 +493,27 @@ footer .ui-controlgroup-label {
 	}
 	
 	.tag-line p {
-	    font-size: 1.8em;	    
+		font-size: 1.8em;
 	}	
 }
 
 .simple-box p {
-    margin-bottom: 0px;
+	margin-bottom: 0px;
 }
 
 .simple-box img {
-    float:left;
-    margin: 20px 20px 0 0;
+	float:left;
+	margin: 20px 20px 0 0;
 }
 
 .ui-controlgroup-horizontal .ui-radio, .ui-controlgroup-horizontal .ui-checkbox {
-    display: inline-block;
-    float:none;
-    margin: 0 -5px 0 0;
+	display: inline-block;
+	float:none;
+	margin: 0 -5px 0 0;
 }
 
 .page-simple .left, .page-simple .right {
-    float:none;
-    width:480px;
-    margin: 0 auto;
+	float:none;
+	width:480px;
+	margin: 0 auto;
 }
