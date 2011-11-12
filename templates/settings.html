@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+
+{% block back %}
+<a href="/" data-icon="back" data-rel="back" class="ui-btn-left">Back</a>
+{% endblock %}
+
+{% block content %}
+<div class="info style-box-2 ui-corner-bottom">
+	<div class="hithere">
+		<h3>Settings</h3>
+	</div>
+	<div data-role="fieldcontain">
+		<fieldset data-role="controlgroup">
+			<input type="checkbox" name="enable-settings" id="enable-settings" />
+			<label for="enable-settings">I'm the only one who has access to this device.</label>
+		</fieldset>
+	</div>
+	
+	<div id="settings">
+		<div data-role="fieldcontain">
+			<label for="default-password">Default password:</label>
+			<input type="password" name="name" id="default-password" value="" class="ui-disabled" data-theme="c" disabled />
+		</div>
+		
+		<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" id="default-length">
+				<legend>Default length:</legend>
+				<input type="radio" name="default-length" id="default-length-0" value="7" disabled/>
+				<label for="default-length-0">7</label>
+				<input type="radio" name="default-length" id="default-length-1" value="14" disabled />
+				<label for="default-length-1">14</label>
+				<input type="radio" name="default-length" id="default-length-2" value="21" checked disabled />
+				<label for="default-length-2">21</label>
+				<input type="radio" name="default-length" id="default-length-3" value="42" disabled />
+				<label for="default-length-3">42</label>
+			</fieldset>
+		</div>
+		
+		<div data-role="fieldcontain">
+		 	<fieldset data-role="controlgroup" id="default-chars">
+		 		<legend>Default charset:</legend>
+				<input type="checkbox" name="chars" id="default-chars-0" checked disabled/>
+				<label for="default-chars-0">abc</label>
+				<input type="checkbox" name="chars" id="default-chars-1" checked disabled />
+				<label for="default-chars-1">ABC</label>
+				<input type="checkbox" name="chars" id="default-chars-2" checked disabled />
+				<label for="default-chars-2">123</label>
+				<input type="checkbox" name="chars" id="default-chars-3" disabled />
+				<label for="default-chars-3">!$%</label>
+			</fieldset>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup">
+				<input type="checkbox" name="auto-retrieve" id="auto-retrieve" disabled />
+				<label for="auto-retrieve">Auto-retrieve password</label>
+			</fieldset>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup">
+				<input type="checkbox" name="auto-hide" id="auto-hide" checked disabled />
+				<label for="auto-hide">Hide the passwords after <span class="auto-hide-time">x</span> seconds</label>
+			</fieldset>
+		</div>
+		
+		<div data-role="fieldcontain">
+			<label for="slider">Hide time:</label>
+			<input type="range" name="auto-hide-time" id="auto-hide-time" value="60" min="10" max="120" data-theme="c" disabled="disabled" />
+		</div>
+	</div>
+</div>	
+{% endblock %}

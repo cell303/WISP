@@ -62,7 +62,7 @@ class MainPage(webapp.RequestHandler):
 			'is_main': is_main
 		}
 								
-		path = os.path.join(os.path.dirname(__file__), file + '.html')
+		path = os.path.join(os.path.dirname(__file__), 'templates/' + file + '.html')
 		self.response.out.write(template.render(path, template_values))
 		
 class Whisper(webapp.RequestHandler):
