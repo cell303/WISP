@@ -517,3 +517,9 @@ footer .ui-controlgroup-label {
 	width:480px;
 	margin: 0 auto;
 }
+
+.version {
+	font-size: 9px;
+	font-weight: normal;
+	text-shadow: none;
+}
