@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# 2011-11-12:2
+# :2
 
 # css
 css/jquery.mobile-1.0rc1.min.css
@@ -24,6 +24,7 @@ images/locked.png
 images/unlocked.png
 images/loading.gif
 images/mobile.png
+images/qr.jpg
 css/images/ajax-loader.png
 css/images/icons-18-black.png
 css/images/icons-18-white.png
