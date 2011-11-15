@@ -148,54 +148,54 @@ class Whisper(webapp.RequestHandler):
 		self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
 		self.response.out.write(data)
 
-	def encrypt_and_put(password, key):
-		"""Encrypts and puts the password in the db but the original remains unaltered"""
-		backup = copy.copy(password.strong)
+def encrypt_and_put(password, key):
+	"""Encrypts and puts the password in the db but the original remains unaltered"""
+	backup = copy.copy(password.strong)
 
-		for i in range(len(password.strong)):
-			password.strong[i] = rc4.encrypt(password.strong[i], key)
-		password.encrypted = True
-		password.put() 
+	for i in range(len(password.strong)):
+		password.strong[i] = rc4.encrypt(password.strong[i], key)
+	password.encrypted = True
+	password.put() 
 
-		password.strong = backup
+	password.strong = backup
 
-	def get_random_passwords(n, len, set):
-		"""Generates n random passwords out of a given set of chars with a length of len"""
-		rnd = []
-		for i in range(n):
-			rnd.append("".join(random.choice(set) for x in range(len)))
-		return rnd		
+def get_random_passwords(n, len, set):
+	"""Generates n random passwords out of a given set of chars with a length of len"""
+	rnd = []
+	for i in range(n):
+		rnd.append("".join(random.choice(set) for x in range(len)))
+	return rnd		
 
-	def merge_old_passwords(password, set):
-		"""Integrates the old passwords into the new system"""
-		randoms = get_random_passwords(n=PASSWORD_NUMBER, len=PASSWORD_LENGTH, set=set)
-		
-		randoms[0] = password.strong1
-		randoms[1] = password.strong2
+def merge_old_passwords(password, set):
+	"""Integrates the old passwords into the new system"""
+	randoms = get_random_passwords(n=PASSWORD_NUMBER, len=PASSWORD_LENGTH, set=set)
+	
+	randoms[0] = password.strong1
+	randoms[1] = password.strong2
 
-		for r in randoms:
+	for r in randoms:
+		password.strong.append(r)
+				
+	return password
+
+
+def fill_up_password_number(password, set):
+	"""Fills up a given password model to the global number of strong passwords"""
+	randoms = get_random_passwords(n=PASSWORD_NUMBER, len=PASSWORD_LENGTH, set=set)
+	for r in randoms:
+		if len(password.strong) < PASSWORD_LENGTH:
 			password.strong.append(r)
-					
-		return password
+		else:
+			break
+	return password
 
-
-	def fill_up_password_number(password, set):
-		"""Fills up a given password model to the global number of strong passwords"""
-		randoms = get_random_passwords(n=PASSWORD_NUMBER, len=PASSWORD_LENGTH, set=set)
-		for r in randoms:
-			if len(password.strong) < PASSWORD_LENGTH:
-				password.strong.append(r)
-			else:
-				break
-		return password
-
-	def fill_up_password_length(password, set):
-		"""Fills up a given password with randoms chars to the global maximum"""
-		randoms = get_random_passwords(n=PASSWORD_NUMBER, len=PASSWORD_LENGTH, set=set)
-		for i in range(PASSWORD_NUMBER):
-			length = len(password.strong[i])
-			password.strong[i] += randoms[i][length:]
-		return password
+def fill_up_password_length(password, set):
+	"""Fills up a given password with randoms chars to the global maximum"""
+	randoms = get_random_passwords(n=PASSWORD_NUMBER, len=PASSWORD_LENGTH, set=set)
+	for i in range(PASSWORD_NUMBER):
+		length = len(password.strong[i])
+		password.strong[i] += randoms[i][length:]
+	return password
 
 application = webapp.WSGIApplication(
 	[('/whisper', Whisper),
