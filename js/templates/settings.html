@@ -1,0 +1,24 @@
+<div class="length-wrapper" data-role="fieldcontain">
+	<fieldset data-role="controlgroup" data-type="horizontal" data-theme="a">
+		<input type="radio" name="length" id="length-0" class="length-0 length" value="7" <% if(length == 7) { %> checked <% } %> />
+		<label for="length-0">7</label>
+		<input type="radio" name="length" id="length-1" class="length-1 length" value="14" <% if(length == 14) { %> checked <% } %> />
+		<label for="length-1">14</label>
+		<input type="radio" name="length" id="length-2" class="length-2 length" value="21" <% if(length == 21) { %> checked <% } %> />
+		<label for="length-2">21</label>
+		<input type="radio" name="length" id="length-3" class="length-3 length" value="42" <% if(length == 42) { %> checked <% } %> />
+		<label for="length-3">42</label>
+	</fieldset>
+</div>
+<div class="chars-wrapper" data-role="fieldcontain">
+	<fieldset data-role="controlgroup" data-type="horizontal" data-theme="a"> 
+		<input type="checkbox" name="chars" id="chars-0" class="chars-0 chars" <% if(chars.lowercase) { %> checked <% } %> />
+		<label for="chars-0"><span class="shortcut">a</span>bc</label>
+		<input type="checkbox" name="chars" id="chars-1" class="chars-1 chars" <% if(chars.uppercase) { %> checked <% } %> />
+		<label for="chars-1"><span class="shortcut">A</span>BC</label>
+		<input type="checkbox" name="chars" id="chars-2" class="chars-2 chars" <% if(chars.numeric) { %> checked <% } %> />
+		<label for="chars-2"><span class="shortcut">1</span>23</label>
+		<input type="checkbox" name="chars" id="chars-3" class="chars-3 chars" <% if(chars.special) { %> checked <% } %> />
+		<label for="chars-3"><span class="shortcut">!</span>$%</label>
+	</fieldset>
+</div> 

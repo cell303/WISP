@@ -1,16 +1,12 @@
 import os
-import cgi
+#import cgi
 import hashlib
-import wsgiref.handlers
 import simplejson
 import string
 import random
 import copy			
 import rc4
-import base64
-
-# GQL Encoder
-import json
+#import wsgiref.handlers
 
 from google.appengine.ext import db
 from google.appengine.ext import webapp
@@ -24,25 +20,25 @@ PASSWORD_SET = string.ascii_uppercase + string.ascii_lowercase + string.digits
 
 class Password(db.Model):
 	"""A combination of a weak with several strong passwords"""
-	weak =  db.StringProperty()
+	weak =  db.StringProperty(required=True)
 	strong = db.ListProperty(str)
 	
-	lowercase = db.BooleanProperty()
-	uppercase = db.BooleanProperty()
-	digits = db.BooleanProperty()
-	special = db.BooleanProperty()
+	lowercase = db.BooleanProperty(required=True)
+	uppercase = db.BooleanProperty(required=True)
+	digits = db.BooleanProperty(required=True)
+	special = db.BooleanProperty(required=True)
 	
 	strong1 = db.StringProperty()
 	strong2 = db.StringProperty()
 
 	encrypted = db.BooleanProperty()
-		
+
 class MainPage(webapp.RequestHandler):
 	def get(self, file):
 		"""query = Password.all()
 		entries =query.fetch(9999)
 		db.delete(entries)"""
-		
+
 		is_main = False
 		
 		if not file:
@@ -57,55 +53,65 @@ class MainPage(webapp.RequestHandler):
 		template_values = {
 			'title': 'WISP',
 			'subtitle': 'A simple password prompter',
-			'version': 'Version 0.7 Beta',
+			'version': 'version 0.8',
 			'nav': ['FAQ', 'Terms', 'About'],
 			'file': file,
 			'is_main': is_main
 		}
 								
-		path = os.path.join(os.path.dirname(__file__), 'templates/' + file + '.html')
+		path = os.path.join(os.path.dirname(__file__), 'pages/' + file + '.html')
 		self.response.out.write(template.render(path, template_values))
 		
 class Whisper(webapp.RequestHandler):
 	"""Retrives the strong passwords for a given weak password"""
-	def post(self):
-		weak = self.request.get('weak').encode('utf-8')
-		weak_hash = hashlib.sha224(weak).hexdigest()
-		
-		key = weak
+	def get(self):
+		data = self.request.get('data').encode('utf-8')
+		data = simplejson.loads(data)
+
+		weak = data['weak']
+		key = weak.encode('ascii', 'replace')
+
+		weak_hash = hashlib.sha224(key).hexdigest()
 
 		charset = PASSWORD_SET
 		options = dict()
-		options['uppercase'] = options['lowercase'] = options['digits'] = True
+		options['uppercase'] = options['lowercase'] = options['numeric'] = True
 		options['special'] = False
 		
-		if self.request.get('options'):
-			options = simplejson.loads(self.request.get('options'))
-			if options['uppercase'] or options['lowercase'] or options['digits'] or options['special']:
+		if data['chars']:
+			options = data['chars']
+			if options['uppercase'] or options['lowercase'] or options['numeric'] or options['special']:
 				charset = ''
 				if options['uppercase']: 
 					charset += string.ascii_uppercase
 				if options['lowercase']:
 					charset += string.ascii_lowercase
-				if options['digits']:
+				if options['numeric']:
 					charset += string.digits
 				if options['special']:
 					charset += "!#$%&'()*+,-./:;=?@[\]^_`{|}~"
 			else:
-				options['uppercase'] = options['lowercase'] = options['digits'] = True
+				options['uppercase'] = options['lowercase'] = options['numeric'] = True
 				options['special'] = False
 			
-		password = Password.all().filter('weak =', weak_hash).filter('lowercase =',options['lowercase']).filter('uppercase =',options['uppercase']).filter('digits =',options['digits']).filter('special =',options['special']).get()
+		password = Password.all()
+		password = password.filter('weak =', weak_hash)
+		password = password.filter('lowercase =',options['lowercase'])
+		password = password.filter('uppercase =',options['uppercase'])
+		password = password.filter('digits =',options['numeric'])
+		password = password.filter('special =',options['special'])
+		password = password.get()
 
 		if not password:
 			randoms = get_random_passwords(n=PASSWORD_NUMBER, len=PASSWORD_LENGTH, set=charset)
 			
-			password = Password()
-			password.weak = weak_hash
-			password.uppercase = options['uppercase']
-			password.lowercase = options['lowercase']
-			password.digits = options['digits']
-			password.special = options['special'] 
+			password = Password(
+				weak = weak_hash,
+				uppercase = options['uppercase'],
+				lowercase = options['lowercase'],
+				digits = options['numeric'],
+				special = options['special']
+			)
 
 			for r in randoms:
 				r = rc4.encrypt(r,key)
@@ -143,7 +149,11 @@ class Whisper(webapp.RequestHandler):
 				password.strong[i] = password.strong[i][:PASSWORD_LENGTH]
 
 		# Encode using the GQL Encoder
-		data = json.encode(password.strong)
+		rest = list()
+		for i in range(len(password.strong)):
+			rest.append({'id': i, 'password': password.strong[i][:data['length']]})
+		
+		data = simplejson.dumps(rest)
 		
 		self.response.headers['Content-Type'] = 'application/json; charset=utf-8'
 		self.response.out.write(data)

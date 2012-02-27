@@ -1,0 +1,23 @@
+{% extends "index.html" %}
+
+{% block back %}
+<a href="/" data-icon="back" data-rel="back" class="ui-btn-left">Back</a>
+{% endblock %}
+
+{% block settings %}
+{% endblock %}
+
+{% block content %}
+<div class="info style-box-2 ui-corner-bottom">
+	<div class="hithere">
+		<h3>Settings</h3>
+	</div>
+	<div data-role="fieldcontain">
+		<fieldset data-role="controlgroup">
+			<input type="checkbox" name="enable-settings" id="enable-settings" />
+			<label for="enable-settings">I'm the only one who has access to this device.</label>
+		</fieldset>
+	</div>
+	<p>This will allow WISP to store some data on this machine so you can access your passwords faster. However no sensitive data will be stored.</p>
+</div>	
+{% endblock %}

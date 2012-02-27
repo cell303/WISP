@@ -1,0 +1,103 @@
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>		<html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>		<html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!-- Consider adding a manifest.appcache: h5bp.com/d/Offline -->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	
+	<title>{{ title }}</title>
+	<meta name="description" content="WISP is an easy way to turn weak passwords into strong ones.">
+
+	<meta property="og:title" content="{{ title }}"/>
+	<meta property="og:type" content="website"/>
+	<meta property="og:url" content="https://wispapp.appspot.com"/>
+	<meta property="og:image" content="https://wispapp.appspot.com/images/icon96.png"/>
+	<meta property="og:site_name" content="{{ title }}"/>
+	<meta property="og:description" content="WISP is an easy way to turn weak passwords into strong ones."/>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+
+	<link rel="icon" href="images/icon16.png" sizes="16x16" type="image/png">
+	<link rel="icon" href="images/icon32.png" sizes="32x32" type="image/png">
+	<link rel="icon" href="images/icon96.png" sizes="96x96" type="image/png">
+	<link rel="apple-touch-icon" href="/images/icon96.png" />
+	<link rel="apple-touch-icon-precomposed" href="/images/icon96.png" />
+
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+	<script data-main="js/main" src="js/libs/require.js"></script>
+	<link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+	<!--[if lt IE 7]><p class=chromeframe>Your browser is <em>ancient!</em> <a href="http://browsehappy.com/">Upgrade to a different browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to experience this site.</p><![endif]-->
+	<div data-role="page" data-theme="a" class="{% if is_main %}page-main{% endif  %} {% block page-class %}{% endblock %}">
+		<header data-role="header" data-theme="a">
+			<h1><a href="/index" data-direction="reverse">{{ title }}</a></h1>
+			{% block back %}{% endblock %}
+			{% block settings %}<a href="/settings" data-icon="gear" class="ui-btn-right">Settings</a>{% endblock %}
+		</header>
+		<nav class="mobile-visible w25" data-role="navbar">
+			<ul>
+				{% for n in nav %}
+					<li><a href="/{{ n|lower }}">{{ n }}</a></li>
+				{% endfor %}
+			</ul>
+		</nav>
+		<section data-role="content">
+			{% block left %}
+			<div class="left">
+				<div class="logo mobile-hidden">
+					<h1><a href="/index" data-direction="reverse">{{title}}</a></h1>
+					<h2>{{ subtitle }}</h2>
+				</div>
+				<div class="app"></div>					
+			</div>
+			{% endblock %}
+			{% block right %}
+			<div class="right">
+				<nav class="mobile-hidden w25 ui-corner-all">
+					<ul>
+						{% for n in nav %}
+							<li><a href="/{{ n|lower }}">{{ n }}</a></li>
+						{% endfor %}
+					</ul>
+				</nav>
+				{% block content %}
+				<div class="info ui-corner-bottom">
+					<div class="tag-line">
+						<p>&raquo;{{ title }} is an easy way to turn weak passwords into strong ones&laquo;</p>
+					</div>
+					<p class="big-question"><a href="/faq">...wait what!?</a></p>
+				</div>
+				<div class="info simple-box ui-corner-all mobile-hidden">
+					<h4>Receive your passwords on the go</h4>
+					<img class="ui-corner-all" style="margin-left:20px; padding:0; float:right" src="/images/qr.jpg" />
+					<p style="padding-top:25px">WISP is optimized for all kinds of mobile devices. The mobile version of WISP is displayed when you open this page with your phone's browser. </p>
+				</div>
+				{% endblock %}
+			</div>
+			{% endblock %}
+		</section>
+		<footer data-role="footer" data-theme="a">
+			<div class="ui-content">
+				<a class="icon-small" href="/index"></a>
+				<h1><a href="/index">{{ title }}</a></h1>
+				<p><a href="https://twitter.com/cell303" rel="external">@cell303</a></p>
+				<p class="version">{{ version }}</p>
+			</div>
+		</footer>
+	</div>
+	<script>
+		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+		s.parentNode.insertBefore(g,s)}(document,'script'));
+	</script>
+</body>
+</html>
