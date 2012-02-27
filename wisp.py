@@ -1,12 +1,10 @@
 import os
-#import cgi
 import hashlib
 import simplejson
 import string
 import random
 import copy			
 import rc4
-#import wsgiref.handlers
 
 from google.appengine.ext import db
 from google.appengine.ext import webapp
