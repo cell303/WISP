@@ -49,8 +49,8 @@ class MainPage(webapp.RequestHandler):
 			is_main = True
 
 		template_values = {
-			'title': 'WISP',
-			'subtitle': 'A simple password prompter',
+			'title': 'Prez',
+			'subtitle': "a simple password prompter",
 			'version': 'version 0.8',
 			'nav': ['FAQ', 'Terms', 'About'],
 			'file': file,

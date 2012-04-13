@@ -10,38 +10,37 @@
 		<h3>Frequently Asked Questions</h3>
 	</div>
 	<h4>What is this?</h4>
-	<p class="text">&raquo;WISP&laquo; is a simple password prompter.</p>
+	<p>&raquo;Prez&laquo; is a simple password prompter.</p>
 	
 	<h4>Why should I use one?</h4>
-	<p class="text">Passwords are not safe. All passwords that contain words which can be found in a dictionary are vulnerable to attack.
+	<p>Regular Passwords are not safe. All passwords that contain words which can be found in a dictionary are vulnerable to getting attacked. 
 	The same applies to passwords that are too short. Take a look at this <a href="http://www.lockdown.co.uk/?pg=combi&amp;s=articles">article</a> to find 
-	out how long your password would stand against brute force attacks. Also take into account that computing power 
-	<a href="http://en.wikipedia.org/wiki/Moore's_law">doubles every two years</a>.
-	Also check out the <a href="http://www.whatsmypass.com/the-top-500-worst-passwords-of-all-time">500 most common passwords</a>.<br/>
-	Still you like choose these passwords because they are easy to remember, ignoring the risk.
-	&raquo;WISP&laquo; lets you choose an "easy to remember"-password and gives you a "hard to guess"-password in return.<br/></p>
+	out how long your password would stand against brute force attacks. 
+	Also take into account that computing power <a href="http://en.wikipedia.org/wiki/Moore's_law">doubles every two years</a> and check out the 
+	<a href="http://www.whatsmypass.com/the-top-500-worst-passwords-of-all-time">500 most common passwords</a>.<br/>
+	If you still prefer to choose these passwords because they are easy to remember Prez has the answer. 
+	It lets you choose an "easy to remember"-password and gives you a "hard to guess"-password in return.</p>
 
 	<h4>How does it work?</h4>
-	<p class="text">
-	When a user enters a &raquo;weak password&laquo; that hasn't been used before, a set of &raquo;strong passwords&laquo; is generated at random.<br/>
-	The passwords are then stored in a database (encrypted of course) and are linked to the provided &raquo;weak password&laquo;. 
-	This means you can always retrieve your &raquo;strong passwords&laquo; with the appropriate &raquo;weak password&laquo;.<br/>
-	Technically thats the same what happens when you enter a weak password that has been used by someone else before you. 
-	In that case you would use the same passwords, without knowing of each other. (Which is why it doesn't matter)<br/>
+	<p>When a user enters a weak password that hasn't been used before, a set of strong passwords is generated at random. 
+	These passwords are then stored in a database (encrypted of course) and are linked to the provided weak password. 
+	This means you can always retrieve your strong passwords with the appropriate weak password.<br/>
+	Technically it's the same that happens when you enter a weak password which has been used by someone else before you. 
+	In that case you would use the same password, without knowing if from each other (which is why it doesn't matter).<br/>
 	You might find it confusing that the passwords are available to anyone, but out of context they are usually worthless.
 	</p>
 
 	<h4>Is it safe?</h4>
-	<p class="text">The honest answer would be: I don't know. I am not a security expert, and it probably has it's vulnerabilities. 
-	However, since this is app is rather unknown I think it's safe enough for my purposes. You decide for yourself.<br/>
-	The data itself is transmitted with 128-bit encryption via TLS 1.0 and the app runs on <a href="http://code.google.com/appengine/">Google Appengine</a>, 
+	<p>The honest is: I don't know. I am not a security expert, and it certainly has it's vulnerabilities. 
+	However, since this is app is rather unknown I consider it safe enough for my purposes. You decide for yourself.<br/> 
+	The data is transmitted with 128-bit encryption via TLS 1.0 and the app runs on <a href="http://code.google.com/appengine/">Google Appengine</a>,
 	providing high uptime.<br/>
 	If you want a more sophisticated an corporate-backed solution you may try <a href="https://dashboard.usablelogin.net/">Useable Login</a>.
 	</p>
-	
+
 	<h4>Why are there so many passwords?</h4>
-	<p class="text">A even bigger problem that comes for the same reasons is <a href="http://xkcd.com/792/">password reuse</a>. In order to address this issue,
-	multiple &raquo;strong passwords&laquo; are given. They are all linked to the same
-	&raquo;weak password&laquo; and come in different colors so that you can remember them easier.<br/>
+	<p>An even bigger problem that's due to the same reasons is <a href="http://xkcd.com/792/">password reuse</a>. In order to address this issue,
+	multiple strong passwords are given. They are all linked to the same weak password and come in different colors so thy are easier to remember.
+	</p>
 </div>
 {% endblock %}

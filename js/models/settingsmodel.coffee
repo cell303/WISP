@@ -27,9 +27,8 @@ define([
       @fetch()
 
     # Used to change the settings of the app.
-    # If the store option is set it will also save the settings to the 
-    # localStorage.
-    # Clears the localStorage otherwise.
+    # If store is set on model, it will save the settings to the 
+    # localStorage. Otherwise the localStorage is cleared.
     # @param {Object} attributes A hash of the settings to change, as with set.
     # @param {Object=} options Options as with `save` or `set`.
     # @returns {SettingsModel} Must return itself to be a valid Backbone.Model.

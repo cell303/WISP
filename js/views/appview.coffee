@@ -10,7 +10,6 @@ define([
   'views/settingsview'
   'views/passwordsview'
   'text!templates/app.html'
-  'libs/jquery.mobile-1.0.1.min'
 ], ($, _, Backbone, IconView, SettingsView, PasswordsView, appTemplate) ->
 
   # The primary class to render the app.
@@ -34,7 +33,7 @@ define([
 
     # Renders the app.
     # Creates view objects and assigns the appropriate models/collections to 
-    # them as well as the rendered DOM elements so they can be rendered. 
+    # them so they can be rendered in return.
     render: =>
       @$el.html(@template(@model.toJSON())).trigger('create')
 

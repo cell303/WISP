@@ -32,14 +32,9 @@
       PasswordsView.prototype.render = function() {
         var el, i, nr, password, _results;
         this.$('.less').empty();
-        this.$('.more .ui-collapsible-content').empty();
         _results = [];
         for (i = 0; i <= 7; i++) {
-          if (i < 2) {
-            el = this.$('.less');
-          } else {
-            el = this.$('.more .ui-collapsible-content');
-          }
+          el = this.$('.less');
           password = this.model.at(i);
           if (password != null) {
             _results.push(el.append($(this.template(password.toJSON())).removeClass('strong-placeholder')));
@@ -56,7 +51,11 @@
 
       PasswordsView.prototype.selectPassword = function(event) {
         try {
-          $(event.target).selectText();
+          if ($(event.target).hasClass('password')) {
+            $(event.target).selectText();
+          } else {
+            $(event.target).find('.password').selectText();
+          }
           return document.execCommand('Copy');
         } catch (exception) {
 

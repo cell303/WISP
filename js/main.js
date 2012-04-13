@@ -1,8 +1,9 @@
 (function() {
 
-  requirejs.config({
+  require.config({
     paths: {
-      jquery: 'libs/jquery-1.6.4.min',
+      jquery: 'libs/jquery-1.7.1.min',
+      jquerymobile: 'libs/jquery.mobile-1.1.0-rc.2.min',
       underscore: 'libs/underscore-min',
       backbone: 'libs/backbone-min',
       order: 'libs/order',
@@ -10,7 +11,7 @@
     }
   });
 
-  require(['jquery', 'underscore', 'backbone', 'models/appmodel', 'views/appview', 'order!libs/jquery.mobile-1.0.1.min'], function($, _, Backbone, AppModel, AppView) {
+  require(['jquery', 'jquerymobile', 'models/appmodel', 'views/appview'], function($, $m, AppModel, AppView) {
     var appModel;
     appModel = new AppModel();
     return $('.ui-page').live('pageinit', function(event, ui) {

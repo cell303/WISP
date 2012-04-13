@@ -7,7 +7,6 @@ define([
   'underscore'
   'backbone'
   'text!templates/settings.html'
-  'libs/jquery.mobile-1.0.1.min'
 ], ($, _, Backbone, settingsTemplate) ->
 
   # Handles the appearance and the events of the app settings badge.
@@ -26,8 +25,22 @@ define([
     # Triggers a create event to tell jquery mobile to style the inputs.
     # `checkboxradio` tells jquery mobile to initialize them.
     render: ->
-      @$el.html(@template(@model.toJSON())).trigger('create')
-      @$("input[type='checkbox'], input[type='radio']").checkboxradio()
+      @$el.html(@template(@model.toJSON()))
+
+      length = @model.get('length')
+      switch length
+        when 7 then @$('.length-0').attr('checked', true)
+        when 14 then @$('.length-1').attr('checked', true)
+        when 21 then @$('.length-2').attr('checked', true)
+        when 42 then @$('.length-3').attr('checked', true)
+
+      chars = @model.get('chars')
+      if chars.lowercase then @$('.chars-0').attr('checked', true)
+      if chars.uppercase then @$('.chars-1').attr('checked', true)
+      if chars.numeric then @$('.chars-2').attr('checked', true)
+      if chars.special then @$('.chars-3').attr('checked', true)
+
+      @$el.trigger("create")
 
     # Tells the view which data to set on the model when the user has changed 
     # a settings.

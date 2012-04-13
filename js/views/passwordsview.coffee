@@ -29,14 +29,11 @@ define([
     # If there are no passwords in the collection placeholders are inserted.
     render: =>
       @$('.less').empty()
-      @$('.more .ui-collapsible-content').empty()
+	  #@$('.more .ui-collapsible-content').empty()
       
       for i in [0..7]
 
-        if i < 2
-          el = @$('.less')
-        else
-          el = @$('.more .ui-collapsible-content')
+        el = @$('.less')
 
         password = @model.at(i)
         if password?
@@ -51,7 +48,10 @@ define([
     # Tries to select and copy the clicked password into the users clipboard.
     selectPassword: (event) =>
       try
-        $(event.target).selectText()
+        if $(event.target).hasClass('password')
+          $(event.target).selectText()
+        else
+          $(event.target).find('.password').selectText()
         document.execCommand('Copy')
       catch exception
 

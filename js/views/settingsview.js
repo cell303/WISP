@@ -3,7 +3,7 @@
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['jquery', 'underscore', 'backbone', 'text!templates/settings.html', 'libs/jquery.mobile-1.0.1.min'], function($, _, Backbone, settingsTemplate) {
+  define(['jquery', 'underscore', 'backbone', 'text!templates/settings.html'], function($, _, Backbone, settingsTemplate) {
     var SettingsView;
     SettingsView = (function(_super) {
 
@@ -25,8 +25,28 @@
       };
 
       SettingsView.prototype.render = function() {
-        this.$el.html(this.template(this.model.toJSON())).trigger('create');
-        return this.$("input[type='checkbox'], input[type='radio']").checkboxradio();
+        var chars, length;
+        this.$el.html(this.template(this.model.toJSON()));
+        length = this.model.get('length');
+        switch (length) {
+          case 7:
+            this.$('.length-0').attr('checked', true);
+            break;
+          case 14:
+            this.$('.length-1').attr('checked', true);
+            break;
+          case 21:
+            this.$('.length-2').attr('checked', true);
+            break;
+          case 42:
+            this.$('.length-3').attr('checked', true);
+        }
+        chars = this.model.get('chars');
+        if (chars.lowercase) this.$('.chars-0').attr('checked', true);
+        if (chars.uppercase) this.$('.chars-1').attr('checked', true);
+        if (chars.numeric) this.$('.chars-2').attr('checked', true);
+        if (chars.special) this.$('.chars-3').attr('checked', true);
+        return this.$el.trigger("create");
       };
 
       SettingsView.prototype.events = function() {

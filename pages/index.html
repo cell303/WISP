@@ -11,14 +11,14 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 	
 	<title>{{ title }}</title>
-	<meta name="description" content="WISP is an easy way to turn weak passwords into strong ones.">
+	<meta name="description" content="Prez is an easy way to turn weak passwords into strong ones.">
 
 	<meta property="og:title" content="{{ title }}"/>
 	<meta property="og:type" content="website"/>
 	<meta property="og:url" content="https://wispapp.appspot.com"/>
 	<meta property="og:image" content="https://wispapp.appspot.com/images/icon96.png"/>
 	<meta property="og:site_name" content="{{ title }}"/>
-	<meta property="og:description" content="WISP is an easy way to turn weak passwords into strong ones."/>
+	<meta property="og:description" content="Prez is an easy way to turn weak passwords into strong ones."/>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
 
@@ -31,7 +31,7 @@
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-	<script data-main="js/main" src="js/libs/require.js"></script>
+	<link href='https://fonts.googleapis.com/css?family=Krona+One|Open+Sans:400,700' rel='stylesheet' type='text/css'>
 	<link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -53,7 +53,7 @@
 			{% block left %}
 			<div class="left">
 				<div class="logo mobile-hidden">
-					<h1><a href="/index" data-direction="reverse">{{title}}</a></h1>
+					<h1><a href="/simple" data-direction="reverse">{{title}}</a></h1>
 					<h2>{{ subtitle }}</h2>
 				</div>
 				<div class="app"></div>					
@@ -78,7 +78,7 @@
 				<div class="info simple-box ui-corner-all mobile-hidden">
 					<h4>Receive your passwords on the go</h4>
 					<img class="ui-corner-all" style="margin-left:20px; padding:0; float:right" src="/images/qr.jpg" />
-					<p style="padding-top:25px">WISP is optimized for all kinds of mobile devices. The mobile version of WISP is displayed when you open this page with your phone's browser. </p>
+					<p style="padding-top:25px">Prez is optimized for all kinds of mobile devices. The mobile version of Prez is displayed when you open this page with your phone's browser. </p>
 				</div>
 				{% endblock %}
 			</div>
@@ -93,11 +93,6 @@
 			</div>
 		</footer>
 	</div>
-	<script>
-		var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
-		(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-		g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-		s.parentNode.insertBefore(g,s)}(document,'script'));
-	</script>
+	<script data-main="js/main" src="js/libs/require.js"></script>
 </body>
 </html>

@@ -3,7 +3,7 @@
     __hasProp = Object.prototype.hasOwnProperty,
     __extends = function(child, parent) { for (var key in parent) { if (__hasProp.call(parent, key)) child[key] = parent[key]; } function ctor() { this.constructor = child; } ctor.prototype = parent.prototype; child.prototype = new ctor; child.__super__ = parent.prototype; return child; };
 
-  define(['jquery', 'underscore', 'backbone', 'views/iconview', 'views/settingsview', 'views/passwordsview', 'text!templates/app.html', 'libs/jquery.mobile-1.0.1.min'], function($, _, Backbone, IconView, SettingsView, PasswordsView, appTemplate) {
+  define(['jquery', 'underscore', 'backbone', 'views/iconview', 'views/settingsview', 'views/passwordsview', 'text!templates/app.html'], function($, _, Backbone, IconView, SettingsView, PasswordsView, appTemplate) {
     var AppView;
     AppView = (function(_super) {
 

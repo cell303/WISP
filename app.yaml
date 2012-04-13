@@ -1,4 +1,4 @@
-application: wispapp
+application: prezapp
 version: 8 
 runtime: python
 api_version: 1
@@ -13,13 +13,6 @@ handlers:
 - url: /images
   static_dir: images
 
-- url: /templates
-  static_dir: templates
-  
-- url: /favicon\.ico
-  static_files: images/favicon.ico
-  upload: images/favicon\.ico
-  
 - url: /cache.manifest
   mime_type: text/cache-manifest 
   static_files: cache.manifest 
@@ -28,4 +21,3 @@ handlers:
 - url: /.*
   script: wisp.py
   secure: always
-

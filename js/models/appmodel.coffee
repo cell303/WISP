@@ -9,9 +9,11 @@ define([
   'models/settingsmodel'
 ], (_, Backbone, PasswordCollection, SettingsModel) ->
   
-  #
+  # This model contains the collection of passwords and a settings model.
+  # Only this class communicates with the server.
   class AppModel extends Backbone.Model
 
+    # Creates an empty PasswordCollection and a default SettingsModel.
     defaults:
       weak: ''
       strong: new PasswordCollection()

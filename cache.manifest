@@ -1,0 +1,35 @@
+CACHE MANIFEST
+# :3
+
+# css
+css/main.css
+
+# js
+js/libs/require.js
+js/main.js
+
+# images
+images/icon16.png
+images/icon32.png
+images/icon64.png
+images/icon72.png
+images/icon96.png
+images/icon128.png
+images/bg.jpg
+images/locked.png
+images/unlocked.png
+images/loading.gif
+images/qr.jpg
+
+css/images/ajax-loader.png
+css/images/icons-18-black.png
+css/images/icons-18-white.png
+css/images/icons-36-black.png
+css/images/icons-36-white.png
+css/images/icon-search-black.png
+
+# fonts
+http://fonts.googleapis.com/css?family=Krona+One|Open+Sans:400,700
+
+NETWORK:
+*
