@@ -4,12 +4,12 @@
 
 require.config(
   paths:
-    jquery: 'libs/jquery-1.7.1.min'
-    jquerymobile: 'libs/jquery.mobile-1.1.0-rc.2.min'
-    underscore: 'libs/underscore-min'
-    backbone: 'libs/backbone-min'
-    order: 'libs/order'
-    text: 'libs/text'
+    jquery: 'vendor/jquery-1.7.1.min'
+    jquerymobile: 'vendor/jquery.mobile-1.1.0-rc.2.min'
+    underscore: 'vendor/underscore-min'
+    backbone: 'vendor/backbone-min'
+    order: 'vendor/order'
+    text: 'vendor/text'
 )
 
 require [
